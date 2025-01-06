@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  item-app:
+    image: localhost:5000/items-app
+    command: sh -c "npm install --production --unsafe-perm && npm run build && npm start"
+    ports:
+      - 80:8080
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=item-db
+  item-db: 
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+volumes:
+  app-db:
