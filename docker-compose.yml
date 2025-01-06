@@ -2,13 +2,11 @@ version: "3.7"
 
 services:
   item-app:
-    image: localhost:5000/items-app
+    image: dhino12/item-app:v1 
     ports:
-      - 80:8080
-    volumes:
-      - ./:/app
+      - 80:8080 
   item-db: 
-    image: localhost:5000/items-db
+    image: mongo:3
     volumes:
       - app-db:/data/db
 volumes:
