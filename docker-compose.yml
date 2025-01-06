@@ -4,10 +4,20 @@ services:
   item-app:
     image: dhino12/item-app:v1 
     ports:
-      - 80:8080 
+      - 80:8080
+    depends_on:
+      item-db:
+        condition: service_healthy
+        
   item-db: 
     image: mongo:3
     volumes:
       - app-db:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping')"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
 volumes:
   app-db:
