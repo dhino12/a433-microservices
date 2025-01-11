@@ -125,6 +125,7 @@ export default {
   },
   methods: {
     sendPost() {
+        console.log(process.env.VUE_APP_BACKEND + '/job')
         const postData = { company: this.company, role: this.role, location: this.location, description: this.description, status: true, published_at: new Date()};
         this.$http
           .post(process.env.VUE_APP_BACKEND + '/job', postData)
